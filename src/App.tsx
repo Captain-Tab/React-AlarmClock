@@ -12,13 +12,12 @@ import './App.css'
 class App extends React.Component{
 
 
-
   render() {
     return (
         <Router>
           <Route exact={true} path="/" component ={Index} />
           <Route path="/login" component={Login} />
-          <Route path="/singup" component={SignUp} />
+          <Route path="/signup" component={SignUp} />
         </Router>
       )
   }

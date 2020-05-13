@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const id: string = "wWWW4jaasU6WxJG76TELKtJb"
-const secret: string = "CEHWCVMuiguR6n2HigJ6HQgs"
+const id = "wWWW4jaasU6WxJG76TELKtJb"
+const secret = "CEHWCVMuiguR6n2HigJ6HQgs"
 
 const instance = axios.create({
-  baseURL: 'https://gp-server.hunger-valley.com',
+  baseURL: 'https://gp-server.hunger-valley.com/',
   timeout: 5000,
   headers: {
     't-app-id': id,
@@ -15,7 +15,7 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
   const xToken = localStorage.getItem('x-token')
   if(xToken){
-    config.headers['Authorization'] = `Bearer $[xToken]`
+    config.headers['Authorization'] = `Bearer ${xToken}`
   }
   return config;
 }, function (error) {
