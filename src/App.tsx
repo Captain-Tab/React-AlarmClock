@@ -1,12 +1,13 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
 } from 'react-router-dom'
 import Index from './component/Index/Index'
 import Login from './component/Login/Login'
 import SignUp from './component/SignUp/SignUp'
 import './App.css'
+import history  from './http/history';
 
 
 class App extends React.Component{
@@ -14,7 +15,7 @@ class App extends React.Component{
 
   render() {
     return (
-        <Router>
+        <Router history={history}>
           <Route exact={true} path="/" component ={Index} />
           <Route path="/login" component={Login} />
           <Route path="/sign_up" component={SignUp} />

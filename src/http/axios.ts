@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from './history';
 
 const id = "wWWW4jaasU6WxJG76TELKtJb"
 const secret = "CEHWCVMuiguR6n2HigJ6HQgs"
@@ -32,8 +33,9 @@ instance.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   if(error.response.status === 401){
-    window.location.href='/login'
-    console.log('重新定向')
+    // window.location.href='/login'
+    // console.log('重新定向')
+    history.push('/login')
   }
   return Promise.reject(error);
 });
