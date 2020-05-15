@@ -17,6 +17,7 @@ class Todo extends React.Component<any, ITodoState> {
     this.updateTodo = this.updateTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.getTodos = this.getTodos.bind(this);
+
   }
 
 
@@ -37,7 +38,8 @@ class Todo extends React.Component<any, ITodoState> {
   getTodos = async () => {
     try {
       const response = await axios.get('todos');
-      this.setState({todoItem: response.data.resources});
+      const todoItem = response.data.resources.map((t: any) => Object.assign({}, t, {editing: false}));
+      this.setState({todoItem});
     } catch (e) {
       throw new Error(e);
     }
@@ -50,14 +52,27 @@ class Todo extends React.Component<any, ITodoState> {
       const newtodoItem = todoItem.map((t) => {
         if (id === t.id) {
           return response.data.resource;
-        }else {
-          return t
+        } else {
+          return t;
         }
       });
       this.setState({todoItem: newtodoItem});
     } catch (e) {
       throw new Error(e);
     }
+  };
+
+  toEdit = (id: number) => {
+    const {todoItem} = this.state;
+    const newtodoItem = todoItem.map(t => {
+        if (id === t.id) {
+          return Object.assign({}, t, {editing: true});
+        } else {
+          return Object.assign({}, t, {editing: false});
+        }
+      }
+    );
+    this.setState({todoItem: newtodoItem});
   };
 
 
@@ -71,6 +86,7 @@ class Todo extends React.Component<any, ITodoState> {
                 return (
                   <TodoItem key={t.id} {...t}
                             update={this.updateTodo}
+                            toEdit={this.toEdit}
                   />
                 );
               }
@@ -81,5 +97,6 @@ class Todo extends React.Component<any, ITodoState> {
     );
   }
 }
+
 
 export default Todo;

@@ -1,0 +1,9 @@
+#TodoItem{
+   > .ant-checkbox-wrapper{
+     > .ant-checkbox{
+       > .ant-checkbox-inner{
+         border-radius: 10px;
+       }
+     }
+   }
+}
