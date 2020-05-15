@@ -1,0 +1,13 @@
+#Index{
+  max-width: 1000px;
+  padding: 16px;
+  >header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+  }
+  >Button >.ant-dropdown-link{
+    border: 1px solid red;
+  }
+}

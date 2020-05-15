@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Button, Input} from 'antd';
+import {Button, Input,message} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import axios from '../../http/axios';
-import '../../style/Login.scss';
+import axios from '../http/axios';
+import '../style/Login.scss';
 
 interface ILogin {
   account: string,
@@ -29,14 +29,18 @@ class Login extends React.Component<any, ILogin> {
 
   handleSubmit = async () => {
     const {account, password} = this.state;
-    try {
-      await axios.post('sign_in/user', {
-        account,
-        password,
-      });
-      this.props.history.push('/')
-    } catch (e) {
-      throw new Error(e);
+    if(password === '' || account === ''){
+      message.info('用户名或者密码不能为空',3)
+    }else {
+      try {
+        await axios.post('sign_in/user', {
+          account,
+          password,
+        });
+        this.props.history.push('/')
+      } catch (e) {
+        throw new Error(e);
+      }
     }
   };
 

@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Button, Input, message} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import axios from '../../http/axios';
-import '../../style/SignUp.scss';
+import axios from '../http/axios';
+import '../style/SignUp.scss';
 
 interface ISignUp {
   account: string,
