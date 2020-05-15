@@ -30,7 +30,6 @@ class TodoInput extends React.Component<TodoInputProps, ITodoInputState>{
   onKeyUp(event: any){
     if(event.keyCode === 13 && this.state.description !== ''){
       this.addTodo()
-      this.setState({description:''})
     }else if (event.keyCode === 13 && this.state.description === ''){
       message.info('输入内容不能为空',3)
     }
@@ -38,6 +37,7 @@ class TodoInput extends React.Component<TodoInputProps, ITodoInputState>{
 
   addTodo(){
       this.props.addTodo({description: this.state.description})
+    this.setState({description:''})
   }
 
   public render() {
