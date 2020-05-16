@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Input, message} from 'antd';
 import {EnterOutlined} from '@ant-design/icons/lib';
 import {connect} from 'react-redux';
-import {addTodo} from '../../redux/action/action';
+import {addTodo} from '../../redux/action/Action';
 import axios from '../../http/axios';
 
 interface ITodoInputState {
@@ -22,8 +22,6 @@ class TodoInput extends React.Component<TodoInputProps, ITodoInputState> {
     this.handleChange = this.handleChange.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.postTodo = this.postTodo.bind(this);
-
-    console.log(this.props);
   }
 
   handleChange(event: any) {
@@ -64,7 +62,6 @@ class TodoInput extends React.Component<TodoInputProps, ITodoInputState> {
     );
   }
 }
-
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps

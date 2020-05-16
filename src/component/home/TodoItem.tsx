@@ -3,14 +3,17 @@ import {Checkbox, message} from 'antd';
 import {EnterOutlined, DeleteFilled} from '@ant-design/icons/lib';
 import classNames from 'classnames';
 import '../../style/TodoItem.scss';
+import {connect} from 'react-redux';
+import {updateTodo, editTodo} from '../../redux/action/Action';
+import axios from '../../http/axios';
 
 interface ITodoItemProps {
   id: number
   description: string;
   completed: boolean;
   editing: boolean;
-  update: (id: number, params: any) => void
-  toEdit: (id: number) => void
+  updateTodo: (payload: any)=> any
+  editTodo: (id: number) => any
 }
 
 interface ITodoItemState {
@@ -23,22 +26,27 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     this.state={
       editText: this.props.description
     }
-    this.update = this.update.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
     this.switchEditing = this.switchEditing.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this)
   }
 
-  update = (params: any) => {
-    this.props.update(this.props.id, params);
+  updateTodo = async (params: any) => {
+    try {
+      const response = await axios.put(`todos/${this.props.id}`, params);
+      this.props.updateTodo(response.data.resource);
+    } catch (e) {
+      throw new Error(e);
+    }
   };
 
   switchEditing = () => {
-    this.props.toEdit(this.props.id);
+    this.props.editTodo(this.props.id);
   };
 
   handleKeyUp=(event: any)=>{
     if(event.keyCode === 13 && this.state.editText !== ''){
-      this.update({description: this.state.editText})
+      this.props.updateTodo({description: this.state.editText})
     }else if (event.keyCode === 13 && this.state.editText === ''){
       message.info('输入内容不能为空',3)
     }
@@ -53,10 +61,10 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
                onKeyUp={event => this.handleKeyUp(event)}
         />
         <div className="iconWrapper">
-          <EnterOutlined  onClick={(event) => this.update({description: this.state.editText})}/>
+          <EnterOutlined  onClick={(event) => this.updateTodo({description: this.state.editText})}/>
 
           <DeleteFilled
-            onClick={(event) => this.update({deleted: true})}/>
+            onClick={(event) => this.updateTodo({deleted: true})}/>
         </div>
       </div>);
 
@@ -71,7 +79,7 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     return (
       <div className={todoItemClass} id="TodoItem">
         <Checkbox checked={this.props.completed}
-                  onChange={event => {this.update({completed: event.target.checked});}}
+                  onChange={event => {this.updateTodo({completed: event.target.checked});}}
         >
 
         </Checkbox>
@@ -85,4 +93,13 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   }
 }
 
-export default TodoItem;
+const mapStateToProps = (state: any, ownProps: any) => ({
+  ...ownProps
+});
+
+const mapDispatchToProps = {
+  updateTodo,
+  editTodo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem);
