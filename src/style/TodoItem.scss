@@ -1,9 +1,58 @@
-#TodoItem{
-   > .ant-checkbox-wrapper{
-     > .ant-checkbox{
-       > .ant-checkbox-inner{
-         border-radius: 10px;
-       }
-     }
-   }
+#TodoItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #dddddd;
+  &:hover {
+    background: #f9f9f9;
+  }
+
+  &.editing {
+  background: #fff3d2;
+  }
+
+  &.completed{
+    >.text{
+      text-decoration: line-through;
+      color: #a9a9a9;
+    };
+  }
+
+  &:first-child{
+    border-top: 1px solid #dddddd;
+  }
+
+  > .editing, > .text {
+    flex: 1;
+    margin-left: 1%;
+  }
+
+  > .editing {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    > input {
+      outline: none;
+      border: none;
+      border-radius: 6px;
+      padding: 4px;
+      background: transparent;
+    }
+    > .iconWrapper{
+      margin-right: 5px;
+      >.anticon{
+        margin-left: 6px;
+        color: #a9a9a9;
+      }
+    }
+  }
+
+
+  > .ant-checkbox-wrapper {
+    > .ant-checkbox {
+      > .ant-checkbox-inner {
+        border-radius: 10px;
+      }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 #Index{
   max-width: 1000px;
   padding: 16px;
+  margin: 0 auto;
   >header{
     display: flex;
     justify-content: space-between;
@@ -10,4 +11,10 @@
   >Button >.ant-dropdown-link{
     border: 1px solid red;
   }
+
+  > main{
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+  };
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Checkbox, message} from 'antd';
-import {CheckCircleFilled, DeleteOutlined} from '@ant-design/icons/lib';
+import {EnterOutlined, DeleteFilled} from '@ant-design/icons/lib';
+import classNames from 'classnames';
 import '../../style/TodoItem.scss';
 
 interface ITodoItemProps {
@@ -45,22 +46,30 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
 
   public render() {
     const Editing = (
-      <div className="Editing">
+      <div className="editing">
         <input type="text"
                value={this.state.editText}
                onChange={(event) => this.setState({editText: event.target.value})}
                onKeyUp={event => this.handleKeyUp(event)}
         />
         <div className="iconWrapper">
-          <CheckCircleFilled onClick={(event) => this.update({description: this.state.editText})}/>
-          <DeleteOutlined
+          <EnterOutlined  onClick={(event) => this.update({description: this.state.editText})}/>
+
+          <DeleteFilled
             onClick={(event) => this.update({deleted: true})}/>
         </div>
       </div>);
 
-    const Text = <span onDoubleClick={this.switchEditing}> {this.props.description}</span>
+    const Text = <span className="text" onDoubleClick={this.switchEditing}> {this.props.description}</span>
+
+    const todoItemClass = classNames({
+      TodoItem: true,
+      editing: this.props.editing,
+      completed: this.props.completed
+    })
+
     return (
-      <div className="TodoItem" id="TodoItem">
+      <div className={todoItemClass} id="TodoItem">
         <Checkbox checked={this.props.completed}
                   onChange={event => {this.update({completed: event.target.checked});}}
         >
