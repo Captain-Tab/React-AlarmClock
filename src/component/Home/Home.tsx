@@ -5,7 +5,7 @@ import {LogoutOutlined,SettingOutlined} from '@ant-design/icons/lib';
 import history from '../../http/history';
 import axios from '../../http/axios';
 import Todo from './Todo'
-import '../../style/Index.scss'
+import '../../style/Home.scss'
 
 interface IRouter {
   history: any
@@ -35,7 +35,7 @@ const menu = (
 );
 
 
-class Index extends React.Component<IRouter, IindexState> {
+class Home extends React.Component<IRouter, IindexState> {
   // eslint-disable-next-line
   constructor(props: any) {
     super(props);
@@ -63,7 +63,7 @@ class Index extends React.Component<IRouter, IindexState> {
 
   public render() {
     return (
-      <div className="Index" id="Index">
+      <div className="Home" id="Home">
         <header>
           <span>Logo</span>
           <Dropdown overlay={menu} trigger={['click']}>
@@ -80,4 +80,4 @@ class Index extends React.Component<IRouter, IindexState> {
   }
 }
 
-export default Index;
+export default Home;
