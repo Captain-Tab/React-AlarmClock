@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, Input,message} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import axios from '../http/axios';
+import axios from '../http/axios'
 import '../style/Login.scss';
 
 interface ILogin {

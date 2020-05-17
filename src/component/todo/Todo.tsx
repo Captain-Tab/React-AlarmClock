@@ -4,15 +4,13 @@ import TodoItem from './TodoItem';
 import axios from '../../http/axios';
 import '../../style/Todo.scss';
 import {connect} from 'react-redux';
-import {initTodo} from '../../redux/action/Action';
+import {initTodo} from '../../redux/action/TodoAction'
 
 
 class Todo extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.getTodos = this.getTodos.bind(this);
-    console.log('todo');
-    console.log(this.props);
   }
 
 

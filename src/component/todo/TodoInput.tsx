@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Input, message} from 'antd';
 import {EnterOutlined} from '@ant-design/icons/lib';
 import {connect} from 'react-redux';
-import {addTodo} from '../../redux/action/Action';
+import {addTodo} from '../../redux/action/TodoAction';
 import axios from '../../http/axios';
 
 interface ITodoInputState {

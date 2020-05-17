@@ -2,10 +2,11 @@ import * as React from 'react';
 import {Dropdown, Button, Menu, message} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
 import {LogoutOutlined,SettingOutlined} from '@ant-design/icons/lib';
-import history from '../../http/history';
-import axios from '../../http/axios';
-import Todo from './Todo'
-import '../../style/Home.scss'
+import history from '../http/history';
+import axios from '../http/axios';
+import Todo from '../component/todo/Todo'
+import Tomato from '../component/tomato/Tomato';
+import '../style/Home.scss'
 
 interface IRouter {
   history: any
@@ -73,6 +74,7 @@ class Home extends React.Component<IRouter, IindexState> {
           </Dropdown>
         </header>
         <main>
+          <Tomato/>
           <Todo/>
         </main>
       </div>
