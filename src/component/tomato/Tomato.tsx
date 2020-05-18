@@ -6,31 +6,32 @@ import {addTomato, initTomato} from '../../redux/action/TomatoAction';
 import axios from '../../http/axios';
 
 interface ITomatoButton {
-  addTomato: (payload: any) => any
   todoTomato: any[]
+  addTomato: (payload: any) => any
+  initTomato: (payload: any[]) => any
 }
 
 class Tomato extends React.Component<ITomatoButton, any> {
-  constructor(props: any) {
+  constructor(props: ITomatoButton) {
     super(props);
     this.startButton = this.startButton.bind(this);
   }
 
   componentDidMount() {
-    this.getTomato()
+    this.getTomato();
   }
-
 
   get unfinishedTomato() {
     return this.props.todoTomato.filter(t => !t.description && !t.ended_at)[0];
   }
 
+
   getTomato = async () => {
     try {
-      const response = await axios.get('tomatoes')
-      console.log(response);
-    }catch (e) {
-      throw new Error(e)
+      const response = await axios.get('tomatoes');
+      this.props.initTomato(response.data.resources);
+    } catch (e) {
+      throw new Error(e);
     }
   };
 
