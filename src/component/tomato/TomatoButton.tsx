@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Button, Input, message} from 'antd';
 import {PoweroffOutlined,CloseCircleOutlined} from '@ant-design/icons';
 import axios from '../../http/axios';
-import CountDown from './CountDown';
 import {EnterOutlined} from '@ant-design/icons/lib';
+import CountDownHooks from './CountDownHook';
 
 interface ITomatoButtonProps {
   startButton: () => void
@@ -23,6 +23,11 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
     };
     this.handleKeyUP = this.handleKeyUP.bind(this);
     this.addDescription = this.addDescription.bind(this);
+    this.onFinish = this.onFinish.bind(this)
+  }
+
+  onFinish = ()=>{
+    this.render()
   }
 
   handleKeyUP = (event: any) => {
@@ -61,8 +66,8 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
     } else {
       const startedAt = Date.parse(this.props.unfinishedTomato.started_at);
       const duration = this.props.unfinishedTomato.duration;
-      console.log(duration)
       const timeNow = new Date().getTime();
+
       if (timeNow - startedAt > duration) {
         const suffix = this.state.description ? <EnterOutlined onClick={this.addDescription}/> : <span/>;
         html =
@@ -78,7 +83,7 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
       } else if (timeNow - startedAt < duration) {
         // 显示倒计时
         const timer = duration - (timeNow-startedAt)
-        html = <CountDown timer={timer}/>;
+        html = <CountDownHooks timer={timer} onFinish={this.onFinish}/>;
       }
     }
 
