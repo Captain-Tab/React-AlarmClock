@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {Button, Input, message} from 'antd';
-import {PoweroffOutlined} from '@ant-design/icons';
+import {PoweroffOutlined,CloseCircleOutlined} from '@ant-design/icons';
 import axios from '../../http/axios';
 import CountDown from './CountDown';
+import {EnterOutlined} from '@ant-design/icons/lib';
 
 interface ITomatoButtonProps {
   startButton: () => void
   unfinishedTomato: any
+  updateTomato:(payload: any)=> void
 }
 
 interface ITomatoButtonState {
@@ -38,7 +40,7 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
           description: this.state.description,
           ended_at: new Date()
         });
-      console.log(response);
+      this.props.updateTomato(response.data.resource)
       this.setState({description: ''});
     } catch (e) {
       throw new Error(e);
@@ -47,7 +49,6 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
 
   public render() {
     let html = <div/>;
-    console.log(this.props.unfinishedTomato);
     // 如果没有未完成的tomato数据对象
     if (this.props.unfinishedTomato === undefined) {
       html = <Button className="startButton"
@@ -60,24 +61,29 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
     } else {
       const startedAt = Date.parse(this.props.unfinishedTomato.started_at);
       const duration = this.props.unfinishedTomato.duration;
+      console.log(duration)
       const timeNow = new Date().getTime();
       if (timeNow - startedAt > duration) {
+        const suffix = this.state.description ? <EnterOutlined onClick={this.addDescription}/> : <span/>;
         html =
           <div>
             <Input placeholder="请输入刚刚完成的任务"
                    value={this.state.description}
+                   suffix={suffix}
                    onChange={event => {this.setState({description: event.target.value});}}
                    onKeyUp={event => this.handleKeyUP(event)}
             />
+            <CloseCircleOutlined />
           </div>;
       } else if (timeNow - startedAt < duration) {
-        html = <CountDown/>;
+        // 显示倒计时
+        const timer = duration - (timeNow-startedAt)
+        html = <CountDown timer={timer}/>;
       }
     }
 
     return (
       <div className="TomatoAction" id="TomatoAction">
-        {console.log('html')}
         {html}
       </div>
     );
