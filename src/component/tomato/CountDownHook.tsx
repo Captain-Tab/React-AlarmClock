@@ -15,7 +15,7 @@ const CountDownHooks: FunctionComponent<ICountDownProps> = (props) => {
   const time = `${min}:${second < 10 ? `0${second}` : second}`;
 
   useEffect(() => {
-    document.title = `${time}-饥人谷番茄`;
+    document.title = `${time}-番茄时间管理`;
     timeId = setInterval(() => {
       setcountDown(countDown - 1000);
       if (countDown < 0) {

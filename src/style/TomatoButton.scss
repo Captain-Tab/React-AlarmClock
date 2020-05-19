@@ -1,0 +1,11 @@
+#TomatoButton {
+  > .inputWrapper {
+    display: flex;
+  }
+  > .CountDownWrapper {
+    position: relative;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+  }
+}

@@ -23,7 +23,7 @@ class Tomato extends React.Component<ITomatoButton, any> {
   }
 
   get unfinishedTomato() {
-    return this.props.todoTomato.filter(t => !t.description && !t.ended_at)[0];
+    return this.props.todoTomato.filter(t => !t.description && !t.ended_at && !t.aborted)[0];
   }
 
 
