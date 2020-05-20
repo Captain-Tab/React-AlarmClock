@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../style/CountDown.scss';
 import {StopOutlined} from '@ant-design/icons/lib';
-import {Button} from 'antd';
+import {Button, message} from 'antd';
 
 interface ICountDownProps {
   timer: number,
@@ -33,10 +33,11 @@ class CountDown extends React.Component<ICountDownProps, ICountDownState> {
   componentDidMount() {
     timerID = setInterval(() => {
       const time = this.state.countDown;
-      document.title = `${this.countDown}-React 番茄时间管理`;
       this.setState({countDown: time - 1000});
+      document.title = `${this.countDown}-React 番茄时间管理`;
       if (time < 1000) {
         // 通知父组件，完成倒计时
+        message.info('时间到，请输入刚才完成的任务',3)
         this.props.onFinish();
         clearInterval(timerID);
       }
