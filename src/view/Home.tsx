@@ -1,35 +1,42 @@
 import * as React from 'react';
 import {Dropdown, Button, Menu, message} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
-import {LogoutOutlined,SettingOutlined} from '@ant-design/icons/lib';
+import {LogoutOutlined, SettingOutlined} from '@ant-design/icons/lib';
 import history from '../http/history';
 import axios from '../http/axios';
-import Todo from '../component/todo/Todo'
-import Tomato from '../component/tomato/Tomato';
-import '../style/Home.scss'
+// import Todo from '../component/todo/Todo'
+// import Tomato from '../component/tomato/Tomato';
+import {connect} from 'react-redux';
+import {initTodo} from '../redux/action/TodoAction';
+import {initTomato} from '../redux/action/TomatoAction';
+
+import '../style/Home.scss';
+import Statistics from '../component/statistic/Statistics';
 
 interface IRouter {
   history: any
+  initTodo:(params: any)=> any
+  initTomato:(params: any)=>any
 }
 
 interface IindexState {
   user: any
 }
 
-const logOut =()=> {
+const logOut = () => {
   localStorage.setItem('x-token', '');
-  history.push('/login')
+  history.push('/login');
   message.info('退出成功', 1);
-}
+};
 
 const menu = (
   <Menu>
     <Menu.Item key="0">
-      <SettingOutlined />个人设置
+      <SettingOutlined/>个人设置
     </Menu.Item>
 
     <Menu.Item key="1" onClick={logOut}>
-      <LogoutOutlined />退出账号
+      <LogoutOutlined/>退出账号
     </Menu.Item>
 
   </Menu>
@@ -46,15 +53,36 @@ class Home extends React.Component<IRouter, IindexState> {
     // this.logOut = this.logOut.bind(this);
   }
 
+  async componentDidMount() {
+    await this.receiveUserData();
+    await this.getTodos();
+    await this.getTomato()
+  }
+
   login = () => {
     this.props.history.push('login');
   };
 
 
+  getTodos = async () => {
+    try {
+      const response = await axios.get('todos');
+      const todoItem = response.data.resources.map((t: any) => Object.assign({}, t, {editing: false}));
+      this.props.initTodo(todoItem);
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
 
-  async componentDidMount() {
-    await this.receiveUserData();
-  }
+  getTomato = async () => {
+    try {
+      const response = await axios.get('tomatoes');
+      this.props.initTomato(response.data.resources);
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
 
   receiveUserData = async () => {
     const response = await axios.get('me');
@@ -73,13 +101,23 @@ class Home extends React.Component<IRouter, IindexState> {
             </Button>
           </Dropdown>
         </header>
-        <main>
-          <Tomato/>
-          <Todo/>
-        </main>
+        {/*<main>*/}
+        {/*  <Tomato/>*/}
+        {/*  <Todo/>*/}
+        {/*</main>*/}
+        <Statistics />
       </div>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state: any, ownProps: any) => ({
+  ...ownProps
+});
+
+const mapDispatchToProps = {
+  initTodo,
+  initTomato
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

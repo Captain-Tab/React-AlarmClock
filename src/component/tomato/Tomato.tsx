@@ -3,18 +3,15 @@ import TomatoButton from './TomatoButton';
 import TomatoList from './TomatoList';
 import '../../style/Tomato.scss';
 import {connect} from 'react-redux';
-import {addTomato, initTomato,updateTomato} from '../../redux/action/TomatoAction';
+import {addTomato,updateTomato} from '../../redux/action/TomatoAction';
 import axios from '../../http/axios';
 import _ from 'lodash'
 import {format} from 'date-fns'
 
 
-
-
 interface ITomatoButton {
   todoTomato: any[]
   addTomato: (payload: any) => any
-  initTomato: (payload: any[]) => any
   updateTomato: (payload: any)=> any
 }
 
@@ -24,9 +21,6 @@ class Tomato extends React.Component<ITomatoButton, any> {
     this.startButton = this.startButton.bind(this);
   }
 
-  componentDidMount() {
-    this.getTomato();
-  }
 
   get unfinishedTomato() {
     return this.props.todoTomato.filter(t => !t.description && !t.ended_at && !t.aborted)[0];
@@ -39,17 +33,6 @@ class Tomato extends React.Component<ITomatoButton, any> {
     })
     return obj
   }
-
-
-  getTomato = async () => {
-    try {
-      const response = await axios.get('tomatoes');
-      this.props.initTomato(response.data.resources);
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-
 
   startButton = async () => {
     try {
@@ -80,7 +63,6 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = {
   addTomato,
-  initTomato,
   updateTomato
 };
 
