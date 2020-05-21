@@ -32,6 +32,10 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   }
 
   updateTodo = async (params: any) => {
+    if(params.completed){
+      params.completed_at = new Date()
+    }
+
     try {
       const response = await axios.put(`todos/${this.props.id}`, params);
       this.props.updateTodo(response.data.resource);
@@ -46,7 +50,8 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
 
   handleKeyUp = (event: any) => {
     if (event.keyCode === 13 && this.state.editText !== '') {
-      this.props.updateTodo({description: this.state.editText});
+      console.log('hello')
+      this.updateTodo({description: this.state.editText});
     } else if (event.keyCode === 13 && this.state.editText === '') {
       message.info('输入内容不能为空', 3);
     }
@@ -58,7 +63,7 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
         <input type="text"
                value={this.state.editText}
                onChange={(event) => this.setState({editText: event.target.value})}
-               onKeyUp={event => this.handleKeyUp(event)}
+               onKeyUp={(event) => this.handleKeyUp(event)}
         />
         <div className="iconWrapper">
           <EnterOutlined onClick={(event) => this.updateTodo({description: this.state.editText})}/>
