@@ -24,7 +24,6 @@ class Polygon extends React.Component<IPolygonProps, any> {
       let finishedCount = 0
       const lastDay =dates[dates.length-1]
       const range = Date.parse(lastDay)-Date.parse(firstDay)
-      console.log(dates)
       const pointArr= dates.map(date=>{
         // 计算得到X的坐标值 = 改天减去第一天的值除以范围 , 最后 乘以240
           let xAxes =(Date.parse(date)-Date.parse(firstDay)) / range * 240
