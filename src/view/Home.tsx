@@ -4,8 +4,8 @@ import {DownOutlined} from '@ant-design/icons';
 import {LogoutOutlined, SettingOutlined} from '@ant-design/icons/lib';
 import history from '../http/history';
 import axios from '../http/axios';
-// import Todo from '../component/todo/Todo'
-// import Tomato from '../component/tomato/Tomato';
+import Todo from '../component/todo/Todo'
+import Tomato from '../component/tomato/Tomato';
 import {connect} from 'react-redux';
 import {initTodo} from '../redux/action/TodoAction';
 import {initTomato} from '../redux/action/TomatoAction';
@@ -101,10 +101,10 @@ class Home extends React.Component<IRouter, IindexState> {
             </Button>
           </Dropdown>
         </header>
-        {/*<main>*/}
-        {/*  <Tomato/>*/}
-        {/*  <Todo/>*/}
-        {/*</main>*/}
+        <main>
+          <Tomato/>
+          <Todo/>
+        </main>
         <Statistics />
       </div>
     );

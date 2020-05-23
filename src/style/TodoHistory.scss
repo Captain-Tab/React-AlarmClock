@@ -1,0 +1,31 @@
+#TodoHistory {
+  > .dailyTodo {
+    padding: 16px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+
+    > .summary {
+      width: 100px;
+      margin-right: 8px;
+      > .dateWrapper{
+        margin-bottom: 8px;
+        > .date {
+          color: black;
+        }
+        > .weekday {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+      > .finishCount{
+       font-size: 12px;
+      }
+    }
+
+    > .todoList {
+      flex: 1;
+    }
+  }
+}
