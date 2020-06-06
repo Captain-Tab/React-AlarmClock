@@ -1,16 +1,39 @@
 import * as React from 'react';
 import '../../style/Statistics.scss'
 import {connect} from 'react-redux';
-import Polygon from './Polygon';
+// import Polygon from './Polygon';
 import _ from 'lodash';
 import {format} from 'date-fns'
+import TotalCount from './TotalCount';
+import PotatoCount from './PotatoCount';
 import TodoHistory from './TodoHistory';
+
 
 interface IStatisticsProps {
   todoData: any[]
 }
 
 class Statistics extends React.Component<IStatisticsProps, any> {
+  constructor(props:IStatisticsProps) {
+    super(props);
+    this.state = {
+      render: '',
+      activeClass: 1,
+    }
+  }
+
+  ShowComponent(name:string, index: number){
+    this.setState({render:name, activeClass: index})
+  }
+
+  renderComponent =()=>{
+    switch (this.state.render) {
+      case 'showHideTotalCount': return <TotalCount/>
+      case 'showHidePotatoCount': return <PotatoCount/>
+      case 'showHideMission': return <TodoHistory/>
+      default: return <TotalCount/>
+    }
+  }
 
   get finishedTodo(){
     return this.props.todoData.filter(t=>t.completed)
@@ -25,20 +48,20 @@ class Statistics extends React.Component<IStatisticsProps, any> {
   public render() {
     return (
       <div className="Statistics" id="Statistics">
-        <ul>
-          <li>统计</li>
-          <li>目标</li>
-          <li>番茄历史</li>
-          <li>
-            任务历史
-            累计完成{this.finishedTodo.length}个任务
-            <Polygon data={this.dailyTodo} totalFinishedCount={this.finishedTodo.length}/>
-          </li>
-        </ul>
-        <div>
-          <TodoHistory/>
+          <ul>
+            <li className ={`${this.state.activeClass === 1? 'active' : ''}`}  onClick={()=>{this.ShowComponent('showHideTotalCount', 1)}}>统计</li>
+            <li className ={`${this.state.activeClass === 2? 'active' : ''}`} onClick={()=>{this.ShowComponent('showHidePotatoCount', 2)}}>番茄历史</li>
+            <li className ={`${this.state.activeClass === 3? 'active' : ''}`} onClick={()=>{this.ShowComponent('showHideMission', 3)}}>累计完成{this.finishedTodo.length}个任务
+              {/*<Polygon data={this.dailyTodo} totalFinishedCount={this.finishedTodo.length}/>*/}
+            </li>
+          </ul>
+
+
+          {/*<TodoHistory/>*/}
+           <div className="InformationContainer">
+             {this.renderComponent()}
+           </div>
         </div>
-      </div>
     );
   }
 }

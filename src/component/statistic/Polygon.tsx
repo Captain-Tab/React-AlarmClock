@@ -11,7 +11,6 @@ class Polygon extends React.Component<IPolygonProps, any> {
     //   point:"0,59.5 20,59.5 30,49.5 228,0 238,0 238,59.5"
     // }
 
-
   point =()=>{
     const dates = Object.keys(this.props.data).sort((a,b)=>{
       return Date.parse(a)-Date.parse(b)
@@ -36,7 +35,6 @@ class Polygon extends React.Component<IPolygonProps, any> {
       return "0,60 240,60 0,60"
     }
   }
-
 
   public render() {
     return (

@@ -6,10 +6,6 @@ import {connect} from 'react-redux';
 
 
 class Todo extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
-
 
   get UnDeletedTodo() {
     return this.props.todoItem.filter((t: any) => !t.deleted);
@@ -31,15 +27,6 @@ class Todo extends React.Component<any, any> {
         <div className="TodoList">
           {
             this.unCompletedTodo.map((t: any) => {
-                return (
-                  <TodoItem key={t.id} {...t}
-                  />
-                );
-              }
-            )
-          }
-          {
-            this.CompletedTodo.map((t: any) => {
                 return (
                   <TodoItem key={t.id} {...t}
                   />

@@ -23,6 +23,7 @@ class TodoHistoryTodoItem extends React.Component<ITodoHistoryProp, any> {
   };
 
   public render() {
+    // eslint-disable-next-line
     let time;
     let timeSyntax: string = '';
     let action;

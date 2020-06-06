@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Dropdown, Button, Menu, message} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
-import {LogoutOutlined, SettingOutlined} from '@ant-design/icons/lib';
+import {LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons/lib';
 import history from '../http/history';
 import axios from '../http/axios';
 import Todo from '../component/todo/Todo'
@@ -9,9 +9,10 @@ import Tomato from '../component/tomato/Tomato';
 import {connect} from 'react-redux';
 import {initTodo} from '../redux/action/TodoAction';
 import {initTomato} from '../redux/action/TomatoAction';
-
+import logoImg from '../assets/React-icon.svg'
 import '../style/Home.scss';
 import Statistics from '../component/statistic/Statistics';
+
 
 interface IRouter {
   history: any
@@ -29,9 +30,13 @@ const logOut = () => {
   message.info('退出成功', 1);
 };
 
+const onWait = () =>{
+  message.info('该功能正在开发',3)
+}
+
 const menu = (
   <Menu>
-    <Menu.Item key="0">
+    <Menu.Item key="0" onClick={onWait}>
       <SettingOutlined/>个人设置
     </Menu.Item>
 
@@ -50,7 +55,6 @@ class Home extends React.Component<IRouter, IindexState> {
     this.state = {
       user: {}
     };
-    // this.logOut = this.logOut.bind(this);
   }
 
   async componentDidMount() {
@@ -94,10 +98,13 @@ class Home extends React.Component<IRouter, IindexState> {
     return (
       <div className="Home" id="Home">
         <header>
-          <span>Logo</span>
+          <div>
+            <img src={logoImg} alt="react-logo"/>
+            <span>番茄时间管理</span>
+          </div>
           <Dropdown overlay={menu} trigger={['click']}>
             <Button type="link" className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              用户 {this.state.user.account}<DownOutlined/>
+              <UserOutlined /> {this.state.user.account}<DownOutlined/>
             </Button>
           </Dropdown>
         </header>

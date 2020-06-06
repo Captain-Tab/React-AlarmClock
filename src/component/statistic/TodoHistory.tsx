@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {format} from 'date-fns';
 import _ from 'lodash';
 import {Badge, Tabs} from 'antd';
-import {CheckOutlined, CloseOutlined} from '@ant-design/icons/lib';
+import {FileDoneOutlined, FileExcelOutlined} from '@ant-design/icons/lib';
 import '../../style/TodoHistory.scss';
 import TodoHistoryTodoItem from './TodoHistoryTodoItem';
 
@@ -30,8 +30,6 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
   get deletedTodo() {
     return this.props.todoData.filter(t => t.deleted);
   }
-
-
 
 
 
@@ -63,13 +61,13 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     });
 
     return (
-      <Tabs defaultActiveKey="2">
-        <TabPane tab={<span><CheckOutlined/>已完成任务</span>} key="1">
+      <Tabs defaultActiveKey="2" type="card">
+        <TabPane tab={<span><FileDoneOutlined />已完成任务</span>} key="1">
           <div className="TodoHistory" id="TodoHistory">
             {finishedTodoList}
           </div>
         </TabPane>
-        <TabPane tab={<span><CloseOutlined/>已删除任务</span>} key="2">
+        <TabPane tab={<span><FileExcelOutlined />已删除任务</span>} key="2">
           <div className="TodoHistory" id="TodoHistory">
             {deletedTodoList}
           </div>

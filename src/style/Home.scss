@@ -7,6 +7,14 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #dddddd;
+    > div >img{
+      max-width: 35%;
+    }
+    > div > span{
+
+      font-size: 12px;
+      font-weight: bold;
+    }
   }
   >Button >.ant-dropdown-link{
     border: 1px solid red;
