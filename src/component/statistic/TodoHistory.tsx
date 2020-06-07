@@ -17,6 +17,7 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     return this.props.todoData.filter(t => t.completed && !t.deleted);
   }
 
+  // 运用了date_fns的format方法和loadash的_.groupBy方法，将数据为同一天的进行分组
   get dailyFinishedTodo() {
     return _.groupBy(this.finishedTodo, (todo) => {
       return format(new Date(todo.updated_at), 'yyyy-MM-d');
@@ -35,13 +36,15 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
   public render() {
 
     const {TabPane} = Tabs;
+    // console.log(this.dailyFinishedTodo)
+    // console.log(this.finishedDate);
     const finishedTodoList = this.finishedDate.map(date => {
       return (
         <div key={date} className="dailyTodo">
           <div className="summary">
             <div className="dateWrapper">
               <span className="date">{date}</span>
-              <span className="weekday"> 周五</span>
+              <span className="weekday"> </span>
             </div>
             <span className="finishCount">完成了 <Badge style={{backgroundColor: '#1890ff'}}
                                                   count={this.dailyFinishedTodo[date].length}/> 个任务</span>
@@ -61,7 +64,7 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     });
 
     return (
-        <Tabs defaultActiveKey="2" type="card">
+        <Tabs defaultActiveKey="1" type="card">
           <TabPane tab={<span><FileDoneOutlined />已完成任务</span>} key="1">
             <div className="TodoHistory" id="TodoHistory">
               {finishedTodoList}

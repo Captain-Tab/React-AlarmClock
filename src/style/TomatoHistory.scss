@@ -1,5 +1,5 @@
-#TodoHistory {
-  > .dailyTodo {
+#TomatoHistory {
+  > .dailyTomato {
     padding: 16px;
     border: 1px solid #dddddd;
     border-radius: 8px;
@@ -9,18 +9,21 @@
     > .summary {
       width: 100px;
       margin-right: 8px;
-      > .dateWrapper{
+      > .dateWrapper {
         margin-bottom: 8px;
+
         > .date {
           color: black;
         }
+
         > .weekday {
           font-size: 8px;
           color: #888;
         }
       }
-      > .finishCount{
-       font-size: 8px;
+
+      > .finishCount {
+        font-size: 8px;
       }
     }
 

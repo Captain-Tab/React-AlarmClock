@@ -9,11 +9,9 @@ import {format} from 'date-fns';
 const TodoHistoryChart = (props: any) => {
 
 
-
-
   const todoData = props.todoData;
 
-  const finishedTodo = todoData.filter((t: any) => t.completed && !t.deleted).splice(0, 6);
+  const finishedTodo = todoData.filter((t: any) => t.completed && !t.deleted);
 
   const dailyFinishedTodo = _.groupBy(finishedTodo, (todo) => {
       return format(new Date(todo.updated_at), 'yyyy-MM-d')
@@ -26,6 +24,7 @@ const TodoHistoryChart = (props: any) => {
       seriesData.push(t.length)
     })
 
+  console.log(seriesData)
   // eslint-disable-next-line
   const chartData = {
     tooltip: {

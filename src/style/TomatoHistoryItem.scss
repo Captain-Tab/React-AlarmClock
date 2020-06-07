@@ -1,0 +1,35 @@
+#TomatoHistoryItem {
+  padding: 4px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+
+  .text {
+    .time {
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .description {
+      color: #222222;
+    }
+  }
+
+  .action {
+    display: none;
+    span {
+      color: #1890ff;
+      cursor: pointer;
+      &:first-child {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  &:hover {
+    background: #f4f4f4;
+    .action {
+      display: block;
+    }
+  }
+}
