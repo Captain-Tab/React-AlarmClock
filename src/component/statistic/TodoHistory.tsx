@@ -32,8 +32,8 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
   }
 
 
-
   public render() {
+
     const {TabPane} = Tabs;
     const finishedTodoList = this.finishedDate.map(date => {
       return (
@@ -43,8 +43,8 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
               <span className="date">{date}</span>
               <span className="weekday"> 周五</span>
             </div>
-            <p className="finishCount">完成了 <Badge style={{backgroundColor: '#1890ff'}}
-                                                  count={this.dailyFinishedTodo[date].length}/> 个任务</p>
+            <span className="finishCount">完成了 <Badge style={{backgroundColor: '#1890ff'}}
+                                                  count={this.dailyFinishedTodo[date].length}/> 个任务</span>
           </div>
           <div className="todoList">
             {this.dailyFinishedTodo[date].map(todo => <TodoHistoryTodoItem key={todo.id} todo={todo} itemType="finished"/> )}
@@ -61,19 +61,18 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     });
 
     return (
-      <Tabs defaultActiveKey="2" type="card">
-        <TabPane tab={<span><FileDoneOutlined />已完成任务</span>} key="1">
-          <div className="TodoHistory" id="TodoHistory">
-            {finishedTodoList}
-          </div>
-        </TabPane>
-        <TabPane tab={<span><FileExcelOutlined />已删除任务</span>} key="2">
-          <div className="TodoHistory" id="TodoHistory">
-            {deletedTodoList}
-          </div>
-        </TabPane>
-      </Tabs>
-
+        <Tabs defaultActiveKey="2" type="card">
+          <TabPane tab={<span><FileDoneOutlined />已完成任务</span>} key="1">
+            <div className="TodoHistory" id="TodoHistory">
+              {finishedTodoList}
+            </div>
+          </TabPane>
+          <TabPane tab={<span><FileExcelOutlined />已删除任务</span>} key="2">
+            <div className="TodoHistory" id="TodoHistory">
+              {deletedTodoList}
+            </div>
+          </TabPane>
+        </Tabs>
     );
   }
 }
