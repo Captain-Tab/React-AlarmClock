@@ -3,7 +3,9 @@
   font-size: 12px;
   display: flex;
   justify-content: space-between;
-
+  border: 1px dashed #dddddd;
+  border-radius: 8px;
+  margin-bottom: 8px;
   .text {
     .time {
       color: #999;

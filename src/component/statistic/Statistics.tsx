@@ -56,12 +56,12 @@ class Statistics extends React.Component<IStatisticsProps, any> {
     return (
       <div className="Statistics" id="Statistics">
         <ul>
-          <li className={`${this.state.activeClass === 1 ? 'active' : ''}`}
+          <li className={`${this.state.activeClass === 1 ? 'switchTab active' : 'switchTab'}`}
               onClick={() => {this.ShowComponent('showHideTotalCount', 1);}}>
             统计
 
           </li>
-          <li className={`${this.state.activeClass === 2 ? 'active' : ''}`}
+          <li className={`${this.state.activeClass === 2 ? 'switchTab active' : 'switchTab'}`}
               onClick={() => {this.ShowComponent('showHidePotatoCount', 2);}}>
             <div className="text-container">
               <span className="title">番茄历史</span>
@@ -72,7 +72,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             <div className="charts-container">
             </div>
           </li>
-          <li className={`${this.state.activeClass === 3 ? 'active' : ''}`}
+          <li className={`${this.state.activeClass === 3 ? 'switchTab active' : 'switchTab'}`}
               onClick={() => {this.ShowComponent('showHideMission', 3);}}>
             <div className="text-container">
               <span className="title">任务历史</span>

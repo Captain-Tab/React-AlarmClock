@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from 'react';
 import {connect,} from 'react-redux';
 import _ from 'lodash';
 import {format} from 'date-fns';
+import Any = jasmine.Any;
 
 
 const TomatoHistoryChart = (props: any) => {
