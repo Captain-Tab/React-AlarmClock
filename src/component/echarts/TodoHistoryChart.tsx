@@ -17,14 +17,15 @@ const TodoHistoryChart = (props: any) => {
       return format(new Date(todo.updated_at), 'yyyy-MM-d')
     });
 
+
     const axisData = Object.keys(dailyFinishedTodo).sort((a, b) => Date.parse(a) - Date.parse(b));
+
     let seriesData: any[] = []
-    const objectValue = Object.values(dailyFinishedTodo)
-    objectValue.map((t:any)=>{
-      seriesData.push(t.length)
+    axisData.map((date)=>{
+      seriesData.push(dailyFinishedTodo[date].length)
     })
 
-  console.log(seriesData)
+  // console.log(seriesData)
   // eslint-disable-next-line
   const chartData = {
     tooltip: {
@@ -38,16 +39,16 @@ const TodoHistoryChart = (props: any) => {
       },
     },
     grid: {
-      x: 1,
-      y: 10,
-      x2: 1,
+      x: 5,
+      y: 5,
+      x2: 2,
       y2: 0
     },
     xAxis: {
       show: false,
       type: 'category',
       boundaryGap: false,
-      data: axisData
+      data: axisData.slice(-4)
     },
     yAxis: {
       show: false,
@@ -56,7 +57,7 @@ const TodoHistoryChart = (props: any) => {
     series: [{
       showSymbol: true,
       symbolSize: 3,   //设定实心点的大小
-      data: seriesData,
+      data: seriesData.slice(-4),
       type:"line",
       areaStyle: {}
     }]
