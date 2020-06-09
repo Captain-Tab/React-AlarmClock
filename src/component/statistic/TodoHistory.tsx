@@ -17,7 +17,7 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     super(props);
     this.state = {
       minValue: 0,
-      maxValue: 3
+      maxValue: 4
     };
   }
 
@@ -25,12 +25,12 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     if (value <= 1) {
       this.setState({
         minValue: 0,
-        maxValue: 3
+        maxValue: 4
       });
     } else {
       this.setState({
-        minValue: (value - 1) * 3,
-        maxValue: (value - 1) * 3 + 3
+        minValue: (value - 1) * 4,
+        maxValue: (value - 1) * 4 + 4
       });
     }
   };
@@ -58,9 +58,7 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
   public render() {
     const min = this.state.minValue;
     const max = this.state.maxValue;
-    console.log(min);
     const {TabPane} = Tabs;
-    console.log(this.finishedDate);
     const finishedTodoList = this.finishedDate.slice(min, max).map(date => {
       return (
         <div key={date} className="dailyTodo">
@@ -90,25 +88,27 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     return (
       <Tabs defaultActiveKey="1" type="card">
         <TabPane tab={<span><FileDoneOutlined/>已完成任务</span>} key="1">
-          <div className="TodoHistory" id="TodoHistory">
+          <div className="TodoHistory">
             {finishedTodoList}
           </div>
           <Pagination
             defaultCurrent={1}
-            defaultPageSize={3}
+            defaultPageSize={4}
             onChange={this.handleChange}
             total={this.finishedDate.length}
+            showTotal={total => `总计 ${this.finishedTodo.length} 个任务`}
           />
         </TabPane>
         <TabPane tab={<span><FileExcelOutlined/>已删除任务</span>} key="2">
-          <div className="TodoHistory" id="TodoHistory">
+          <div className="TodoHistory">
             {deletedTodoList}
           </div>
           <Pagination
             defaultCurrent={1}
-            defaultPageSize={3}
+            defaultPageSize={4}
             onChange={this.handleChange}
             total={this.deletedTodo.length}
+            showTotal={total => `总计 ${this.deletedTodo.length} 个任务`}
           />
         </TabPane>
       </Tabs>

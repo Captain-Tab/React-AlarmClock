@@ -23,6 +23,7 @@ const TodoHistoryChart = (props: any) => {
     let seriesData: any[] = []
     axisData.map((date)=>{
       seriesData.push(dailyFinishedTodo[date].length)
+      return ''
     })
 
   // console.log(seriesData)

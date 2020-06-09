@@ -35,13 +35,12 @@ class TodoHistoryTodoItem extends React.Component<ITodoHistoryProp, any> {
         <span onClick={() => this.updateTodo({deleted: true})}>删除</span>
       </div>);
     } else if (this.props.itemType === 'deleted') {
-      timeSyntax = 'yyyy-MM-d-HH:MM';
+      timeSyntax = 'yyyy-MM-d HH:MM';
       time = this.props.todo.created_at;
       action = (<div className="action">
         <span onClick={() => this.updateTodo({deleted: false})}>恢复</span>
       </div>);
     }
-
 
     return (
       <div className="TodoHistoryTodoItem" id="TodoHistoryTodoItem">
@@ -52,6 +51,7 @@ class TodoHistoryTodoItem extends React.Component<ITodoHistoryProp, any> {
         <div className="action">
           {action}
         </div>
+
       </div>
     );
   }

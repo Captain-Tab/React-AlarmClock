@@ -82,7 +82,6 @@ class TomatoButton extends React.Component<ITomatoButtonProps, ITomatoButtonStat
       );
       this.props.updateTomato(response.data.resource);
       this.setState({description: ''});
-
     } catch (e) {
       throw new Error(e);
     }

@@ -11,7 +11,8 @@ import TodoHistoryEcharts from '../echarts/TodoHistoryChart';
 
 
 interface IStatisticsProps {
-  todoData: any[]
+  todoData: any[],
+  tomatoData: any[]
 }
 
 class Statistics extends React.Component<IStatisticsProps, any> {
@@ -42,6 +43,10 @@ class Statistics extends React.Component<IStatisticsProps, any> {
     }
   };
 
+  get finishedTomato() {
+    return this.props.tomatoData.filter(t => t.ended_at && !t.aborted && !t.manually_created)
+  }
+
   get finishedTodo() {
     return this.props.todoData.filter(t => t.completed);
   }
@@ -66,7 +71,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             <div className="text-container">
               <span className="title">番茄历史</span>
               <span className="subtitle">累计完成任务</span>
-              <span className="quantity"> </span>
+              <span className="quantity">{this.finishedTomato.length}</span>
             </div>
 
             <div className="charts-container">
@@ -86,8 +91,6 @@ class Statistics extends React.Component<IStatisticsProps, any> {
           </li>
         </ul>
 
-
-        {/*<TodoHistory/>*/}
         <div className="InformationContainer">
           {this.renderComponent()}
         </div>
@@ -98,6 +101,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   todoData: state.TodoReducer,
+  tomatoData: state.TomatoReducer,
   ...ownProps
 });
 
