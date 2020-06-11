@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 import TotalCount from './TotalCount';
 import TomatoHistory from './TomatoHistory';
 import TodoHistory from './TodoHistory';
-import StackAreaChart from '../echarts/StackAreaChart';
-
+import TabChart from '../echarts/TabChart';
 
 interface IStatisticsProps {
   todoData: any[],
@@ -68,7 +67,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             </div>
 
             <div className="charts-container">
-
+              <TabChart data={this.finishedTodo} unfinishedData={this.unfinishedTodo} chartType="pieChart"/>
             </div>
 
           </li>
@@ -81,7 +80,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             </div>
 
             <div className="charts-container">
-              <StackAreaChart data={this.finishedTomato} itemType="tomatoData"/>
+              <TabChart data={this.finishedTomato} chartType="stackAreaChart"/>
             </div>
           </li>
           <li className={`${this.state.activeClass === 3 ? 'switchTab active' : 'switchTab'}`}
@@ -93,7 +92,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             </div>
             {/*<Polygon data={this.dailyTodo} totalFinishedCount={this.finishedTodo.length}/>*/}
             <div className="charts-container chart3">
-             <StackAreaChart data={this.finishedTodo} itemType="todoData"/>
+             <TabChart data={this.finishedTodo} chartType="stackAreaChart"/>
             </div>
           </li>
         </ul>

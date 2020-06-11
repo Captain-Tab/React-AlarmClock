@@ -6,36 +6,29 @@ import {format} from 'date-fns'
 
 interface IData {
   data:any,
-  itemType: string
+  unfinishedData?: any
+  chartType: string
 }
 
-const StackAreaChart = (props: IData) => {
-    let data
-    let finishedData
-    let seriesData: any[] = []
+const TabChart = (props: IData) => {
+  const data = props.data
+  let chartData : any
+  let seriesData: any[] = []
+  let axisData: any[] = []
 
-    if( props.itemType === 'todoData'){
-      data = props.data;
-      finishedData = data.filter((t: any) => t.completed && !t.deleted);
-    }else if(props.itemType === 'tomatoData'){
-      data = props.data
-      finishedData = data.filter((t:any) => t.ended_at && !t.aborted && !t.manually_created)
-    }
+  if(props.chartType === 'stackAreaChart'){
+    const dailyFinishedData = _.groupBy(data, (todo) => {
+      return format(new Date(todo.updated_at), 'yyyy-MM-d')
+    });
 
-    const dailyFinishedData = _.groupBy(finishedData, (todo) => {
-        return format(new Date(todo.updated_at), 'yyyy-MM-d')
-      });
-
-    const axisData = Object.keys(dailyFinishedData).sort((a, b) => Date.parse(a) - Date.parse(b));
+    axisData = Object.keys(dailyFinishedData).sort((a, b) => Date.parse(a) - Date.parse(b));
 
     axisData.map((date:string)=>{
       seriesData.push(dailyFinishedData[date].length)
       return ''
     })
 
-    // console.log(seriesData)
-    // eslint-disable-next-line
-    const chartData = {
+    chartData = {
       tooltip: {
         show: true,
         formatter:function (params: any) {
@@ -64,13 +57,47 @@ const StackAreaChart = (props: IData) => {
       },
       series: [{
         showSymbol: true,
-        symbolSize: 3,   //设定实心点的大小
+        symbolSize: 5,   //设定实心点的大小
         data: seriesData.slice(-4),
         type:"line",
         areaStyle: {}
       }]
     }
-    // @typescript-eslint/no-unused-vars
+  }else if(props.chartType === 'pieChart' && props.unfinishedData){
+    const finished = data.length
+    const unfinished = props.unfinishedData.length
+
+
+    chartData ={
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c}个 ({d}%)'
+      },
+      series: [
+        {
+          name: '统计',
+          type: 'pie',
+          radius: '70%',
+          center: ['50%', '50%'],
+          data: [
+            {value: finished, name: '完成任务'},
+            {value: unfinished, name: '未完成任务'}
+          ],
+          labelLine: {
+            show: false
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0,0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    }
+  }
+
     const [option, setOption] = useState(chartData);
     const container = useRef<any>(null);
     const chart = useRef<any>(null);
@@ -90,4 +117,4 @@ const StackAreaChart = (props: IData) => {
       <div ref={container}>你好</div>
     );
   };
-export default StackAreaChart
+export default TabChart
