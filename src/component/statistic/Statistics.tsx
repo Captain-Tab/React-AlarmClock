@@ -2,12 +2,10 @@ import * as React from 'react';
 import '../../style/Statistics.scss';
 import {connect} from 'react-redux';
 // import Polygon from './Polygon';
-import _ from 'lodash';
-import {format} from 'date-fns';
 import TotalCount from './TotalCount';
 import TomatoHistory from './TomatoHistory';
 import TodoHistory from './TodoHistory';
-import TodoHistoryEcharts from '../echarts/TodoHistoryChart';
+import StackAreaChart from '../echarts/StackAreaChart';
 
 
 interface IStatisticsProps {
@@ -24,6 +22,18 @@ class Statistics extends React.Component<IStatisticsProps, any> {
     };
     this.ShowComponent = this.ShowComponent.bind(this);
     this.renderComponent = this.renderComponent.bind(this);
+  }
+
+  get finishedTodo() {
+    return this.props.todoData.filter(t => t.completed && !t.deleted);
+  }
+
+  get unfinishedTodo(){
+    return this.props.todoData.filter(t=> !t.completed && !t.deleted)
+  }
+
+  get finishedTomato() {
+    return this.props.tomatoData.filter(t => t.ended_at && !t.aborted && !t.manually_created)
   }
 
   ShowComponent(name: string, index: number) {
@@ -43,27 +53,23 @@ class Statistics extends React.Component<IStatisticsProps, any> {
     }
   };
 
-  get finishedTomato() {
-    return this.props.tomatoData.filter(t => t.ended_at && !t.aborted && !t.manually_created)
-  }
-
-  get finishedTodo() {
-    return this.props.todoData.filter(t => t.completed);
-  }
-
-  get dailyTodo() {
-    return _.groupBy(this.finishedTodo, (todo) => {
-      return format(new Date(todo.updated_at), 'yyy-MM-d');
-    });
-  }
-
   public render() {
+    console.log(this.props.todoData)
+    console.log(this.unfinishedTodo)
     return (
       <div className="Statistics" id="Statistics">
         <ul>
           <li className={`${this.state.activeClass === 1 ? 'switchTab active' : 'switchTab'}`}
               onClick={() => {this.ShowComponent('showHideTotalCount', 1);}}>
-            统计
+            <div className="text-container">
+              <span className="title">统计</span>
+              <span className="subtitle">总共剩余任务</span>
+              <span className="quantity">{this.unfinishedTodo.length}</span>
+            </div>
+
+            <div className="charts-container">
+
+            </div>
 
           </li>
           <li className={`${this.state.activeClass === 2 ? 'switchTab active' : 'switchTab'}`}
@@ -75,6 +81,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             </div>
 
             <div className="charts-container">
+              <StackAreaChart data={this.finishedTomato} itemType="tomatoData"/>
             </div>
           </li>
           <li className={`${this.state.activeClass === 3 ? 'switchTab active' : 'switchTab'}`}
@@ -86,7 +93,7 @@ class Statistics extends React.Component<IStatisticsProps, any> {
             </div>
             {/*<Polygon data={this.dailyTodo} totalFinishedCount={this.finishedTodo.length}/>*/}
             <div className="charts-container chart3">
-              <TodoHistoryEcharts/>
+             <StackAreaChart data={this.finishedTodo} itemType="todoData"/>
             </div>
           </li>
         </ul>
@@ -104,8 +111,5 @@ const mapStateToProps = (state: any, ownProps: any) => ({
   tomatoData: state.TomatoReducer,
   ...ownProps
 });
-
-// const mapDispatchToProps = {
-// };
 
 export default connect(mapStateToProps)(Statistics);
