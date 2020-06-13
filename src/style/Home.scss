@@ -23,7 +23,18 @@
   > main{
     padding: 16px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: space-around;
   };
+
+  >footer{
+    border-top: 1px solid #ddd;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    >.mainTools > img{
+      max-width: 136px;
+    }
+
+  }
 }
