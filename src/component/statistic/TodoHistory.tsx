@@ -86,8 +86,8 @@ class TodoHistory extends React.Component<ITodohistoryProps, any> {
     });
 
     return (
-      <Tabs defaultActiveKey="1" type="card">
-        <TabPane tab={<span><FileDoneOutlined/>已完成任务</span>} key="1">
+      <Tabs defaultActiveKey="1" type="card" >
+        <TabPane tab={<span><FileDoneOutlined/>已完成任务</span>} key="1" >
           <div className="TodoHistory">
             {finishedTodoList}
           </div>

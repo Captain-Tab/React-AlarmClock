@@ -42,19 +42,23 @@ class Statistics extends React.Component<IStatisticsProps, any> {
   renderComponent = () => {
     switch (this.state.render) {
       case 'showHideTotalCount':
-        return <TotalCount/>;
+        return <TotalCount finishedTodo={this.finishedTodo}
+                           finishedTomato={this.finishedTomato}
+                           unfinishedTodo={this.unfinishedTodo}
+        />;
       case 'showHidePotatoCount':
         return <TomatoHistory/>;
       case 'showHideMission':
         return <TodoHistory/>;
       default:
-        return <TotalCount/>;
+        return <TotalCount finishedTodo={this.finishedTodo}
+                           finishedTomato={this.finishedTomato}
+                           unfinishedTodo={this.unfinishedTodo}
+        />;
     }
   };
 
   public render() {
-    console.log(this.props.todoData)
-    console.log(this.unfinishedTodo)
     return (
       <div className="Statistics" id="Statistics">
         <ul>

@@ -32,8 +32,7 @@ const TabChart = (props: IData) => {
       tooltip: {
         show: true,
         formatter:function (params: any) {
-          let res = params.name + `: 完成了${params.value}个`
-          return res
+          return params.name + `: 完成了${params.value}个`
         },
         textStyle : {
           fontSize: 12,
