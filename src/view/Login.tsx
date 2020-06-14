@@ -30,16 +30,25 @@ class Login extends React.Component<any, ILogin> {
   handleSubmit = async () => {
     const {account, password} = this.state;
     if(password === '' || account === ''){
-      message.info('用户名或者密码不能为空',3)
+      message.warning('用户名或者密码不能为空',3)
     }else {
       try {
         await axios.post('sign_in/user', {
           account,
           password,
         });
+        message.success('用户登录成功',1)
         this.props.history.push('/')
       } catch (e) {
-        throw new Error(e);
+           switch (e.response.status) {
+             case 422:
+               message.error('用户或者密码错误',3)
+               break
+             case 401:
+               message.error('请求未被认证，发生失败',3)
+               break
+             default:  message.error('未知错误',3)
+           }
       }
     }
   };

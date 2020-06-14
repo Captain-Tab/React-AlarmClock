@@ -25,13 +25,12 @@ const TotalChart = (props: IData) => {
       axisLabel: {
         show: true,
         interval:0,
-        fontSize: 8,
+        fontSize: 7,
         fontWeight: "bold",
       },
       axisTick: {
         show: true
       }
-
     },
     yAxis: {
       type: 'value',
@@ -59,15 +58,26 @@ const TotalChart = (props: IData) => {
     const height = document.getElementsByClassName('chartBox')[0].clientHeight * 5;
     container.current.style.width = `${width}px`;
     container.current.style.height = `${height}px`;
+
     chart.current = echarts.init(container.current, 'light');
     chart.current.setOption(option);
+
+    // 根据网页的大小，更新图表的大小
+    window.onresize = () => {
+      const width = document.getElementsByClassName('chartBox')[0].clientWidth * 0.95;
+     chart.current.resize({width})
+    }
     // eslint-disable-next-line
   }, [option]);
   useEffect(() => {
     chart.current.setOption(chartData);
   }, [chartData]);
+
+
   return (
     <div ref={container}>你好</div>
   );
+
+
 };
 export default TotalChart;

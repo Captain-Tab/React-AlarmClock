@@ -28,7 +28,7 @@ interface IindexState {
 const logOut = () => {
   localStorage.setItem('x-token', '');
   history.push('/login');
-  message.info('退出成功', 1);
+  message.success('退出成功', 1);
 };
 
 const onWait = () => {
@@ -113,9 +113,9 @@ class Home extends React.Component<IRouter, IindexState> {
         <main>
           <Tomato/>
           <Todo/>
+          <Statistics/>
         </main>
 
-        <Statistics/>
 
         <footer>
           <div className="sourceCode"><a href="https://github.com/Captain-Tab/React-AlarmClock">源码地址</a></div>

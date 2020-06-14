@@ -1,40 +1,76 @@
-#Home{
-  max-width: 960px;
+#Home {
+  max-width: 75%;
   padding: 0 16px;
   margin: 0 auto;
-  >header{
+
+  > header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #dddddd;
-    > div >img{
+
+    > div > img {
       max-width: 35%;
     }
-    > div > span{
+
+    > div > span {
 
       font-size: 12px;
       font-weight: bold;
     }
   }
-  >Button >.ant-dropdown-link{
+
+  > Button > .ant-dropdown-link {
     border: 1px solid red;
   }
 
-  > main{
+  > main {
     padding: 16px 0;
     display: flex;
     justify-content: space-around;
-  };
+    flex-wrap: wrap;
+  }
+;
 
-  >footer{
+  > footer {
     border-top: 1px solid #ddd;
     padding: 1em 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    >.mainTools > img{
+
+    > .mainTools > img {
       max-width: 136px;
     }
 
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #Home {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #Home {
+    max-width: 90%;
+
+    > main {
+      display: block;
+      >#Tomato{
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      >#Todo{
+        width: 100%;
+      }
+      >#Statistics{
+        width: 100%;
+        > ul{
+          display: block;
+        }
+      }
+    }
   }
 }

@@ -52,9 +52,9 @@ class SignUp extends React.Component<any, ISignUp> {
   handleSubmit = async () => {
     const {account, password, passwordConfirm} = this.state;
     if (password !== passwordConfirm) {
-      message.info('注册失败，密码不一致', 3);
+      message.warning('注册失败，密码不一致', 3);
     } else if (account.length < 5) {
-      message.info('注册失败，用户名过短', 3);
+      message.warning('注册失败，用户名过短', 3);
     } else {
       try {
         await axios.post('sign_up/user', {
@@ -62,9 +62,14 @@ class SignUp extends React.Component<any, ISignUp> {
           password,
           password_confirmation: passwordConfirm,
         });
-        message.info('账号注册成功', 3);
+        message.success('账号注册成功', 3);
       } catch (e) {
-        throw new Error(e);
+        switch (e.response.status) {
+          case 422:
+            message.error('用户已注册',3)
+            break
+          default:  message.error('未知错误',3)
+        }
       }
     }
   };

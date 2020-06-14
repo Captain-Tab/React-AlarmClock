@@ -75,6 +75,7 @@ class TotalCount extends React.Component<IdataProps, any> {
     const todoMax = this.computeMax(this.dailyFinishedTodo);
     const tomatoMax = this.computeMax(this.dailyFinishedTomato);
 
+
     return (
       <div className="TotalCount" id="TotalCount">
         <Tabs defaultActiveKey="2" type="card">
