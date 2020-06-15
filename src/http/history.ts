@@ -9,7 +9,6 @@ if (ENV === 'development') {
   publicUrl = '/React-AlarmClock';
 }
 
-
 const history = createBrowserHistory({
   basename: publicUrl
 })

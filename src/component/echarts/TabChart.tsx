@@ -96,7 +96,7 @@ const TabChart = (props: IData) => {
       ]
     }
   }
-
+  // eslint-disable-next-line
     const [option, setOption] = useState(chartData);
     const container = useRef<any>(null);
     const chart = useRef<any>(null);

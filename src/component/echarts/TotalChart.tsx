@@ -49,7 +49,7 @@ const TotalChart = (props: IData) => {
       y2: 20
     },
   };
-
+  // eslint-disable-next-line
   const [option, setOption] = useState(chartData);
   const container = useRef<any>(null);
   const chart = useRef<any>(null);
@@ -63,21 +63,21 @@ const TotalChart = (props: IData) => {
     chart.current.setOption(option);
 
     // 根据网页的大小，更新图表的大小
-    window.onresize = () => {
+    window.addEventListener("resize", () => {
       const width = document.getElementsByClassName('chartBox')[0].clientWidth * 0.95;
-     chart.current.resize({width})
-    }
+      chart.current.resize({width})
+    });
+    // window.onresize = () => {
+    //
+    // }
     // eslint-disable-next-line
   }, [option]);
   useEffect(() => {
     chart.current.setOption(chartData);
   }, [chartData]);
 
-
   return (
     <div ref={container}>你好</div>
   );
-
-
 };
 export default TotalChart;
