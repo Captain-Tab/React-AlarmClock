@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "./static/css/main.195b25b7.chunk.css",
-    "main.js": "./static/js/main.c2a38fc4.chunk.js",
-    "main.js.map": "./static/js/main.c2a38fc4.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.33fd17bd.js",
-    "runtime-main.js.map": "./static/js/runtime-main.33fd17bd.js.map",
-    "static/css/2.4deadad5.chunk.css": "./static/css/2.4deadad5.chunk.css",
-    "static/js/2.5b67bf50.chunk.js": "./static/js/2.5b67bf50.chunk.js",
-    "static/js/2.5b67bf50.chunk.js.map": "./static/js/2.5b67bf50.chunk.js.map",
-    "index.html": "./index.html",
-    "precache-manifest.24ce320b8b2435aeb2eb8da17c222c52.js": "./precache-manifest.24ce320b8b2435aeb2eb8da17c222c52.js",
-    "service-worker.js": "./service-worker.js",
-    "static/css/2.4deadad5.chunk.css.map": "./static/css/2.4deadad5.chunk.css.map",
-    "static/css/main.195b25b7.chunk.css.map": "./static/css/main.195b25b7.chunk.css.map",
-    "static/js/2.5b67bf50.chunk.js.LICENSE.txt": "./static/js/2.5b67bf50.chunk.js.LICENSE.txt",
-    "static/media/React-icon.svg": "./static/media/React-icon.4d656383.svg"
+    "main.css": "/React-AlarmClock/static/css/main.0aa8dc65.chunk.css",
+    "main.js": "/React-AlarmClock/static/js/main.15ac2d98.chunk.js",
+    "main.js.map": "/React-AlarmClock/static/js/main.15ac2d98.chunk.js.map",
+    "runtime-main.js": "/React-AlarmClock/static/js/runtime-main.32b62d04.js",
+    "runtime-main.js.map": "/React-AlarmClock/static/js/runtime-main.32b62d04.js.map",
+    "static/css/2.4deadad5.chunk.css": "/React-AlarmClock/static/css/2.4deadad5.chunk.css",
+    "static/js/2.5b67bf50.chunk.js": "/React-AlarmClock/static/js/2.5b67bf50.chunk.js",
+    "static/js/2.5b67bf50.chunk.js.map": "/React-AlarmClock/static/js/2.5b67bf50.chunk.js.map",
+    "index.html": "/React-AlarmClock/index.html",
+    "precache-manifest.499cc53c2cdf7d5d1b3b28fc7c396d41.js": "/React-AlarmClock/precache-manifest.499cc53c2cdf7d5d1b3b28fc7c396d41.js",
+    "service-worker.js": "/React-AlarmClock/service-worker.js",
+    "static/css/2.4deadad5.chunk.css.map": "/React-AlarmClock/static/css/2.4deadad5.chunk.css.map",
+    "static/css/main.0aa8dc65.chunk.css.map": "/React-AlarmClock/static/css/main.0aa8dc65.chunk.css.map",
+    "static/js/2.5b67bf50.chunk.js.LICENSE.txt": "/React-AlarmClock/static/js/2.5b67bf50.chunk.js.LICENSE.txt",
+    "static/media/React-icon.svg": "/React-AlarmClock/static/media/React-icon.4d656383.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.33fd17bd.js",
+    "static/js/runtime-main.32b62d04.js",
     "static/css/2.4deadad5.chunk.css",
     "static/js/2.5b67bf50.chunk.js",
-    "static/css/main.195b25b7.chunk.css",
-    "static/js/main.c2a38fc4.chunk.js"
+    "static/css/main.0aa8dc65.chunk.css",
+    "static/js/main.15ac2d98.chunk.js"
   ]
 }
